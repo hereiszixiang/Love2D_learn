@@ -1,6 +1,7 @@
 -- io.stdout:setvbuf("no")
 require("example")
 local Entry = require("entry")
+local EnemyBase = require("enemy_base")
 local num = 0
 print(7)
 
@@ -18,6 +19,7 @@ function love.load()
     myImage = love.graphics.newImage("assets/images/sheep.png")
 
     player = Entry(100, 200)
+    enemy = EnemyBase(300, 300)
 end
 
 function love.update(dt)
@@ -31,6 +33,8 @@ function love.update(dt)
     for index, value in ipairs(listOfRectangles) do
         value.x = value.x + value.speed * dt
     end
+
+    enemy:update(dt)
 end
 
 function love.draw()
@@ -47,6 +51,8 @@ function love.draw()
     end
 
     love.graphics.draw(myImage,100,100)
+
+    enemy:draw()
 end
 
 
